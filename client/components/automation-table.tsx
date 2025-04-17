@@ -1,37 +1,12 @@
+'use client'
+
 import { Avatar } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Clock, Edit, Play, Trash2 } from "lucide-react"
 
-const automations = [
-  {
-    name: "Backup Diário",
-    description: "Realiza backup automático dos dados",
-    lastRun: "Hoje, 14:32",
-    status: "success",
-    frequency: "Diária",
-    nextRun: "Amanhã, 14:30",
-  },
-  {
-    name: "Sincronização de Dados",
-    description: "Sincroniza dados entre sistemas",
-    lastRun: "Hoje, 14:30",
-    status: "warning",
-    frequency: "A cada 4h",
-    nextRun: "Hoje, 18:30",
-  },
-  {
-    name: "Envio de Relatórios",
-    description: "Envia relatórios por email",
-    lastRun: "Hoje, 14:28",
-    status: "error",
-    frequency: "Diária",
-    nextRun: "Amanhã, 08:00",
-  },
-]
-
-export function AutomationTable() {
+export function AutomationTable({ automations }) {
   return (
     <Table className="border-zinc-800">
       <TableHeader>
@@ -45,8 +20,8 @@ export function AutomationTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {automations.map((automation) => (
-          <TableRow key={automation.name} className="border-zinc-800 hover:bg-zinc-800/50 text-white">
+        {automations.map((automation, index) => (
+          <TableRow key={index} className="border-zinc-800 hover:bg-zinc-800/50 text-white">
             <TableCell className="font-medium">
               <div className="flex items-center gap-2">
                 <Avatar className="h-8 w-8 bg-primary/10">
@@ -78,7 +53,7 @@ export function AutomationTable() {
             <TableCell>
               <div className="flex gap-2">
                 <Button size="icon" variant="ghost" className="h-8 w-8">
-                  <Play className="h-4 w-4" />
+                  <Play className="h-4 w-4"/>
                 </Button>
                 <Button size="icon" variant="ghost" className="h-8 w-8">
                   <Edit className="h-4 w-4" />
