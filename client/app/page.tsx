@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { MetricsCard } from "@/components/metrics-card"
 import { StatsChart } from "@/components/stats-chart"
 import { AutomationTable } from "@/components/automation-table"
-import { BarChart3, Clock, Code, LayoutDashboard, LifeBuoy, Play, Plus, Settings, Zap } from 'lucide-react'
+import { BarChart3, Clock, Code, Github, LayoutDashboard, LifeBuoy, Play, Plus, Settings, Zap } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function Page() {
@@ -15,29 +15,30 @@ export default function Page() {
         <main className="p-6 overflow-y-auto h-screen">
           <div className="mb-6 flex items-center justify-between">
             <div className="space-y-1">
-              <h1 className="text-2xl font-bold">Gerenciador de Automações</h1>
-              <div className="text-sm text-muted-foreground">Gerencie e monitore suas automações em um só lugar</div>
+              <h1 className="text-2xl font-bold text-white flex items-center gap-2"><Zap className="text-[#EA580C]"/> Webhooker</h1>
+
+              <div className="text-sm text-muted-foreground text-white">Gerencie e monitore suas automações em um só lugar</div>
             </div>
-            <Button className="gap-2 bg-primary hover:bg-primary/90">
-              <Plus className="h-4 w-4" />
-              Nova Automação
+            <Button className="gap-2 bg-primary bg-[#EA580C]">
+              <Github className="h-4 w-4"/>
+              Github
             </Button>
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
             <MetricsCard
               title="Total de Automações"
-              value="24"
+              value="3"
               change={{ value: "+3", percentage: "+14.2%", isPositive: true }}
             />
             <MetricsCard
               title="Execuções Hoje"
-              value="142"
+              value="3"
               change={{ value: "+28", percentage: "+24.5%", isPositive: true }}
             />
             <MetricsCard
               title="Taxa de Sucesso"
-              value="98.7%"
+              value="60%"
               change={{ value: "+0.5%", percentage: "+0.5%", isPositive: true }}
             />
           </div>
@@ -61,20 +62,15 @@ export default function Page() {
                     <Input placeholder="Descreva o propósito desta automação" />
                   </div>
                   <div>
-                    <label className="text-sm font-medium mb-1 block">Código da Automação</label>
-                    <Textarea
-                      placeholder="Insira o código da sua automação aqui..."
-                      className="font-mono text-sm h-32"
+                    <label className="text-sm font-medium mb-1 block">Webhook de disparo da automação</label>
+                    <Input
+                      placeholder="Cole a URL do seu webhook aqui"
                     />
                   </div>
                   <div className="flex gap-2">
-                    <Button className="w-full gap-2 bg-primary hover:bg-primary/90">
-                      <Plus className="h-4 w-4" />
+                    <Button className="w-full gap-2 bg-primary hover:bg-primary/90 bg-[#EA580C]">
+                      <Plus className="h-4 w-4 " />
                       Salvar
-                    </Button>
-                    <Button variant="outline" className="gap-2 text-black">
-                      <Play className="h-4 w-4" />
-                      Testar
                     </Button>
                   </div>
                 </div>

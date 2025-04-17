@@ -10,7 +10,6 @@ const automations = [
     description: "Realiza backup automático dos dados",
     lastRun: "Hoje, 14:32",
     status: "success",
-    type: "Agendada",
     frequency: "Diária",
     nextRun: "Amanhã, 14:30",
   },
@@ -19,7 +18,6 @@ const automations = [
     description: "Sincroniza dados entre sistemas",
     lastRun: "Hoje, 14:30",
     status: "warning",
-    type: "Agendada",
     frequency: "A cada 4h",
     nextRun: "Hoje, 18:30",
   },
@@ -28,18 +26,8 @@ const automations = [
     description: "Envia relatórios por email",
     lastRun: "Hoje, 14:28",
     status: "error",
-    type: "Agendada",
     frequency: "Diária",
     nextRun: "Amanhã, 08:00",
-  },
-  {
-    name: "Verificação de Integridade",
-    description: "Verifica integridade dos dados",
-    lastRun: "Hoje, 14:25",
-    status: "success",
-    type: "Manual",
-    frequency: "-",
-    nextRun: "-",
   },
 ]
 
@@ -51,7 +39,6 @@ export function AutomationTable() {
           <TableHead>Automação</TableHead>
           <TableHead>Última Execução</TableHead>
           <TableHead>Status</TableHead>
-          <TableHead>Tipo</TableHead>
           <TableHead>Frequência</TableHead>
           <TableHead>Próxima Execução</TableHead>
           <TableHead>Ações</TableHead>
@@ -86,7 +73,6 @@ export function AutomationTable() {
                 {automation.status === "error" && "Erro"}
               </Badge>
             </TableCell>
-            <TableCell>{automation.type}</TableCell>
             <TableCell>{automation.frequency}</TableCell>
             <TableCell>{automation.nextRun}</TableCell>
             <TableCell>
