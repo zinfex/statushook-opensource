@@ -1,10 +1,19 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-require('dotenv').config();
+const connectDB = require("./config/Database");
+const automacoesRouter = require("./routes/Automacoes");
+const usuariosRouter = require("./routes/Usuarios");
+require("dotenv").config();
 
 app.use(express.json());
-app.use('/automacoes', automacoesRoutes);
+connectDB();
+
+app.use("/automacoes", automacoesRouter);
+app.use("/usuarios", usuariosRouter);
+app.get("/", (req, res) => {
+  res.send("Server do webhooker ativado");
+});
 
 app.listen(process.env.PORT, () => {
-    console.log('Server is running');
+  console.log("Server is running");
 });

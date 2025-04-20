@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const automacoesRouter = express.Router();
 const AutomacaoController = require('../controllers/AutomacaoController');
 
-router.post('/', AutomacaoController.criarAutomacao);
-router.get('/', AutomacaoController.listarAutomacoes);
-router.get('/:id', AutomacaoController.buscarPorId);
-router.put('/:id', AutomacaoController.atualizar);
-router.delete('/:id', AutomacaoController.deletar);
+automacoesRouter.post('/', AutomacaoController.criarAutomacao);
+automacoesRouter.get('/', AutomacaoController.listarAutomacoes);
+automacoesRouter.get('/:id', AutomacaoController.buscarPorId);
+automacoesRouter.put('/:id', AutomacaoController.atualizar);
+automacoesRouter.delete('/:id', AutomacaoController.deletar);
 
-module.exports = router;
+module.exports = automacoesRouter;
