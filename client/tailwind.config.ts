@@ -83,9 +83,18 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+			"slideDown": {
+				from: { 
+					transform: 'translateY(-20px)' 
+				},
+				to: { 
+					transform: 'translateY(0)' 
+				},
+			},
   		},
   		animation: {
+			'slide-down': 'slideDown 0.3s ease-out',
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
   		}

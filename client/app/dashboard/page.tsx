@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,34 +10,39 @@ import { StatsChart } from "@/components/stats-chart"
 import { AutomationTable } from "@/components/automation-table"
 import { Github, Play, Plus, Zap } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import AutomationsReq from "../actions/automations"
+import LogsReq from "../actions/logs"
+
 
 export default function Page() {
-  const [automations, setAutomations] = useState([
-    {
-      name: "Backup Diário",
-      description: "Realiza backup automático dos dados",
-      lastRun: "Hoje, 14:32",
-      status: "success",
-      frequency: "Diária",
-      nextRun: "Amanhã, 14:30",
-    },
-    {
-      name: "Sincronização de Dados",
-      description: "Sincroniza dados entre sistemas",
-      lastRun: "Hoje, 14:30",
-      status: "warning",
-      frequency: "A cada 4h",
-      nextRun: "Hoje, 18:30",
-    },
-    {
-      name: "Envio de Relatórios",
-      description: "Envia relatórios por email",
-      lastRun: "Hoje, 14:28",
-      status: "error",
-      frequency: "Diária",
-      nextRun: "Amanhã, 08:00",
-    },
-  ])
+  // const [automations, setAutomations] = useState([
+  //   {
+  //     name: "Backup Diário",
+  //     description: "Realiza backup automático dos dados",
+  //     lastRun: "Hoje, 14:32",
+  //     status: "success",
+  //     frequency: "Diária",
+  //     nextRun: "Amanhã, 14:30",
+  //   },
+  //   {
+  //     name: "Sincronização de Dados",
+  //     description: "Sincroniza dados entre sistemas",
+  //     lastRun: "Hoje, 14:30",
+  //     status: "warning",
+  //     frequency: "A cada 4h",
+  //     nextRun: "Hoje, 18:30",
+  //   },
+  //   {
+  //     name: "Envio de Relatórios",
+  //     description: "Envia relatórios por email",
+  //     lastRun: "Hoje, 14:28",
+  //     status: "error",
+  //     frequency: "Diária",
+  //     nextRun: "Amanhã, 08:00",
+  //   },
+  // ])
+  const [automations, setAutomations] = useState([])
+  const [logs, setLogs] = useState([])
 
   const [newAutomation, setNewAutomation] = useState({
     name: "",
@@ -87,6 +92,21 @@ export default function Page() {
       logElement.prepend(newLog)
     }
   }
+ 
+  useEffect(() => {
+    const automationsData = async () => {
+      const res = await AutomationsReq();
+      setAutomations(res);
+    } 
+    automationsData();
+  
+    const logsData = async () => {
+      const res = await LogsReq();
+      setLogs(res);
+    } 
+    logsData();
+  }, []);
+  
 
   return (
     <div className="h-screen overflow-auto bg-black text-white p-6">
@@ -177,16 +197,14 @@ export default function Page() {
                   id="automation-logs"
                   className="bg-black/50 p-3 rounded-md font-mono text-xs h-48 overflow-y-auto space-y-2"
                 >
-                  <div className="text-green-400">[14:32:05] Automação "Backup Diário" executada com sucesso</div>
-                  <div className="text-yellow-400">
-                    [14:30:22] Aviso: Automação "Sincronização" demorou mais que o esperado
-                  </div>
-                  <div className="text-red-400">[14:28:15] Erro: Automação "Envio de Relatórios" falhou - Timeout</div>
-                  <div className="text-green-400">
-                    [14:25:01] Automação "Verificação de Integridade" executada com sucesso
-                  </div>
-                  <div className="text-green-400">[14:20:45] Automação "Limpeza de Cache" executada com sucesso</div>
-                  <div className="text-muted-foreground">[14:15:30] Iniciando execução programada de automações</div>
+                  {logs.map((log, index) => (
+                     <div key={index} className={`
+                       ${log.status === 'success' ? 'text-green-400' : ''}
+                       ${log.status === 'error' ? 'text-red-400' : ''}
+                     `}>
+                       {log.data} Automação "{log.nome_automacao}" {log.log}
+                     </div>
+                   ))}
                 </div>
               </TabsContent>
             </Tabs>
