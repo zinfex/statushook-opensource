@@ -4,6 +4,7 @@ import {
   ArrowRight,
   CheckCircle,
   Code,
+  Github,
   Globe,
   LucideGithub,
   Rocket,
@@ -86,15 +87,22 @@ export default function LandingPage() {
               gerenciarem seus webhooks e automações com precisão e confiança.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white h-12 px-8 rounded-md">
-                Comece Gratuitamente
-              </Button>
-              <Button
-                variant="outline"
-                className="border-zinc-700 text-black hover:bg-slate-300 h-12 px-8 rounded-md"
-              >
-                Ver Documentação <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <a href="">
+                <Button className="bg-orange-500 hover:bg-orange-600 text-white h-12 px-8 rounded-md">
+                  Comece gratuitamente
+                </Button>
+              </a>
+              <a href="/dashboard?demo=true">
+                <Button
+                  variant="outline"
+                  className="border-zinc-700 text-black hover:bg-slate-300 h-12 px-8 rounded-md"
+                >
+                  Versão demonstração <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+              <a href="https://github.com/zinfex/webhooker-gerenciador-automacoes" target="_blank">
+                <Button className="bg-[#1A1A1C] border-zinc-700 h-12 px-8 rounded-md"><Github /> Github</Button>
+              </a>
             </div>
             <div className="mt-6 text-sm text-zinc-500">
               Sem cartão de crédito • Teste grátis por 14 dias
@@ -257,7 +265,7 @@ export default function LandingPage() {
             />
             <PricingCard
               title="Pro"
-              price="U$10/mês"
+              price="U$20/mês"
               description="Ideal para startups e pequenas equipes."
               features={[
                 "Webhooks ilimitados",
@@ -316,9 +324,11 @@ export default function LandingPage() {
                 vez.
               </p>
               <div className="flex space-x-4 mt-6">
-                <a href="#" className="text-zinc-500 hover:text-white">
+                <a href="https://github.com/zinfex/webhooker-gerenciador-automacoes" target="_blank" className="text-zinc-500 hover:text-white">
                   <LucideGithub className="h-5 w-5" />
                 </a>
+
+                
                 <a href="#" className="text-zinc-500 hover:text-white">
                   <svg
                     className="h-5 w-5"

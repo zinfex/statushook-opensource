@@ -1,6 +1,11 @@
 import { api } from "@/config/Api"
 
-export default async function TestWebhook(webhook, token, nome_automacao, id) {
+interface WebhookResponse {
+  webhook: string
+  token: string
+}
+
+export default async function TestWebhook({ webhook, token }: WebhookResponse): Promise<any> {
     const res = await api.get(webhook, {
         headers: {
             'Content-Type': 'application/json',
@@ -56,7 +61,7 @@ export default async function TestWebhook(webhook, token, nome_automacao, id) {
     //   console.error("Erro ao enviar log:", error)
     // }
   
-    let json
+    let json: any = {}
     try {
       json = await res.json()
     } catch {

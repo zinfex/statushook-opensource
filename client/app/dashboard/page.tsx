@@ -12,45 +12,47 @@ import { Github, Play, Plus, Zap } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import AutomationsReq from "../actions/automations"
 import LogsReq from "../actions/logs"
+import LogsTestReq from "../actions/demos/logsDemo"
+import AutomationsTestReq from "../actions/demos/automationsDemo"
+import { useSearchParams } from "next/navigation"
 
 
 export default function Page() {
-  // const [automations, setAutomations] = useState([
-  //   {
-  //     name: "Backup Diário",
-  //     description: "Realiza backup automático dos dados",
-  //     lastRun: "Hoje, 14:32",
-  //     status: "success",
-  //     frequency: "Diária",
-  //     nextRun: "Amanhã, 14:30",
-  //   },
-  //   {
-  //     name: "Sincronização de Dados",
-  //     description: "Sincroniza dados entre sistemas",
-  //     lastRun: "Hoje, 14:30",
-  //     status: "warning",
-  //     frequency: "A cada 4h",
-  //     nextRun: "Hoje, 18:30",
-  //   },
-  //   {
-  //     name: "Envio de Relatórios",
-  //     description: "Envia relatórios por email",
-  //     lastRun: "Hoje, 14:28",
-  //     status: "error",
-  //     frequency: "Diária",
-  //     nextRun: "Amanhã, 08:00",
-  //   },
-  // ])
-  const [automations, setAutomations] = useState([])
-  const [logs, setLogs] = useState([])
+  const searchParams = useSearchParams()
+  const isDemo = searchParams.get("demo") === "true"
 
-  const [newAutomation, setNewAutomation] = useState({
+  type Automation = {
+    name: string
+    description: string
+    lastRun: string
+    status: 'success' | 'error' | 'warning'
+    frequency: string
+    nextRun: string
+    type?: string
+  }
+  const [automations, setAutomations] = useState<Automation[]>([])
+  
+  type LogEntry = {
+    data: string
+    nome_automacao: string
+    log: string
+    status: 'success' | 'error' | string
+  }
+  const [logs, setLogs] = useState<LogEntry[]>([])
+
+  type NewAutomation = {
+    name: string
+    description: string
+    code: string
+  }
+  
+  const [newAutomation, setNewAutomation] = useState<NewAutomation>({
     name: "",
     description: "",
     code: "",
   })
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setNewAutomation((prev) => ({
       ...prev,
@@ -64,12 +66,11 @@ export default function Page() {
     const currentDate = new Date()
     const formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
 
-    const newItem = {
+    const newItem: Automation = {
       name: newAutomation.name,
       description: newAutomation.description || "Sem descrição",
       lastRun: `Hoje, ${formattedTime}`,
       status: "success",
-      type: "Manual",
       frequency: "-",
       nextRun: "-",
     }
@@ -94,18 +95,19 @@ export default function Page() {
   }
  
   useEffect(() => {
-    const automationsData = async () => {
-      const res = await AutomationsReq();
-      setAutomations(res);
-    } 
-    automationsData();
-  
-    const logsData = async () => {
-      const res = await LogsReq();
-      setLogs(res);
-    } 
-    logsData();
-  }, []);
+    const fetchAutomations = async () => {
+      const res = await (isDemo ? AutomationsTestReq() : AutomationsReq())
+      setAutomations(res)
+    }
+
+    const fetchLogs = async () => {
+      // const res = await (isDemo ? LogsTestReq() : LogsReq())
+      // setLogs(res)
+    }
+
+    fetchAutomations()
+    fetchLogs()
+  }, [isDemo])  
   
 
   return (
@@ -116,7 +118,11 @@ export default function Page() {
           <div className="text-sm text-white">Gerencie e monitore suas automações em um só lugar</div>
         </div>
 
-        <Button className="bg-[#EA580C]"><Github /> Github</Button>
+        <div className="flex items-center gap-2">  
+          <a href="https://github.com/zinfex/webhooker-gerenciador-automacoes" target="_blank">
+            <Button className="bg-[#EA580C]"><Github /> Github</Button>
+          </a>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
