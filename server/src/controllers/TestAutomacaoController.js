@@ -11,9 +11,7 @@ exports.listarAutomacoes = async (req, res) => {
 
 exports.buscarPorId = async (req, res) => {
   try {
-    const automacao = await TestAutomacaoService.buscarPorId(
-      req.params.id,
-    );
+    const automacao = await TestAutomacaoService.buscarPorId(req.params.id);
     res.status(200).json(automacao);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -1,6 +1,6 @@
 import { api } from "@/config/Api";
 
-export default async function AutomationsTestReq() {
+async function AutomationsTestReq() {
   try {
     const res = await api.get('/teste/automacoes');
     return res.data;
@@ -9,3 +9,5 @@ export default async function AutomationsTestReq() {
     throw new Error("Erro ao buscar automações");
   }
 }
+
+export default AutomationsTestReq;

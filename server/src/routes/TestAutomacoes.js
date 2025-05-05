@@ -4,8 +4,5 @@ const TestAutomacaoController = require('../controllers/TestAutomacaoController.
 
 testeAutomacoesRouter.get('/', TestAutomacaoController.listarAutomacoes);
 testeAutomacoesRouter.get('/:id', TestAutomacaoController.buscarPorId);
-// testeAutomacoesRouter.post('/', AutomacaoController.criarAutomacao);
-// testeAutomacoesRouter.put('/:id', AutomacaoController.atualizar);
-// testeAutomacoesRouter.delete('/:id', AutomacaoController.deletar);
 
 module.exports = testeAutomacoesRouter;

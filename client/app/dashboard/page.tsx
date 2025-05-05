@@ -12,7 +12,6 @@ import { Github, Play, Plus, Zap } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import AutomationsReq from "../actions/automations"
 import LogsReq from "../actions/logs"
-import LogsTestReq from "../actions/demos/logsDemo"
 import AutomationsTestReq from "../actions/demos/automationsDemo"
 import { useSearchParams } from "next/navigation"
 
@@ -22,14 +21,16 @@ export default function Page() {
   const isDemo = searchParams.get("demo") === "true"
 
   type Automation = {
-    name: string
+    id: string
+    nome: string
     description: string
     lastRun: string
-    status: 'success' | 'error' | 'warning'
-    frequency: string
+    status: "success" | "warning" | "error"
+    frequencia: string
     nextRun: string
-    type?: string
-  }
+    disparo: string
+    token: string
+}
   const [automations, setAutomations] = useState<Automation[]>([])
   
   type LogEntry = {
@@ -39,6 +40,9 @@ export default function Page() {
     status: 'success' | 'error' | string
   }
   const [logs, setLogs] = useState<LogEntry[]>([])
+  const addLog = (log: LogEntry) => {
+    setLogs(prevLogs => [log, ...prevLogs])
+  }
 
   type NewAutomation = {
     name: string
@@ -61,17 +65,21 @@ export default function Page() {
   }
 
   const handleSaveAutomation = () => {
+    if (isDemo) {
+      window.location.href = '/signup'
+    }
+
     if (!newAutomation.name) return
 
     const currentDate = new Date()
     const formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
 
     const newItem: Automation = {
-      name: newAutomation.name,
+      nome: newAutomation.name,
       description: newAutomation.description || "Sem descrição",
       lastRun: `Hoje, ${formattedTime}`,
       status: "success",
-      frequency: "-",
+      frequencia: "-",
       nextRun: "-",
     }
 
@@ -101,14 +109,13 @@ export default function Page() {
     }
 
     const fetchLogs = async () => {
-      // const res = await (isDemo ? LogsTestReq() : LogsReq())
+      // const res = await LogsReq()
       // setLogs(res)
     }
 
     fetchAutomations()
     fetchLogs()
   }, [isDemo])  
-  
 
   return (
     <div className="h-screen overflow-auto bg-black text-white p-6">
@@ -146,7 +153,7 @@ export default function Page() {
       <div className="grid gap-6 mt-6 lg:grid-cols-[1fr_400px]">
         <Card className="p-6 bg-zinc-900 border-zinc-800">
           <h2 className="text-lg font-semibold mb-4 text-white">Automações Recentes</h2>
-          <AutomationTable automations={automations} />
+          <AutomationTable automations={automations} onAddLog={addLog} /> 
         </Card>
 
         <div className="space-y-6">

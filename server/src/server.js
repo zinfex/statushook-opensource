@@ -20,7 +20,9 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use("/automacoes", automacoesRouter);
 app.use("/usuarios", usuariosRouter);
+
 app.use("/teste/automacoes", testeAutomacoesRouter);
+
 app.get("/", (req, res) => {
   res.send("Server do webhooker ativado");
 });

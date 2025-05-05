@@ -6,7 +6,7 @@
       "token": "",
       "ultima_execucao": "",
       "status": "success",
-      "frequencia": "",
+      "frequencia": "Todos os dias - 14:00",
       "descricao": "Sincroniza os dados com o sistema externo."
     },
     {
@@ -16,7 +16,7 @@
       "token": "",
       "ultima_execucao": "",
       "status": "error",
-      "frequencia": "",
+      "frequencia": "Todos os dias - 11:00",
       "descricao": "Realiza o backup semanal."
     }
   ]
