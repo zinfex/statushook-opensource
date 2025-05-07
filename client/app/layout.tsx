@@ -11,6 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
+      <link rel="icon" href="/favicon.png" />
       <body className={inter.className} suppressHydrationWarning>{children}</body>
     </html>
   )
@@ -18,7 +19,15 @@ export default function RootLayout({
 
 
 import './globals.css'
+import { Metadata } from "next"
 
-export const metadata = {
-      generator: 'v0.dev'
-    };
+export const metadata: Metadata = {
+  title: {
+    default: 'Webhooker - Monitore suas automações',
+    template: '%s - Monitore suas automações',
+    absolute: '',
+  },
+  description: 'Automação de Webhooks com integração ao Discord, Telegram e WhatsApp',
+  generator: 'v0.dev',
+  keywords: ["automation", "platform", "webhooks", "api", "integrations"],
+};

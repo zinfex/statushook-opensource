@@ -4,7 +4,7 @@
       "nome": "Teste diário webhook empresa",
       "disparo": "http://localhost:8000/teste/automacoes",
       "token": "",
-      "ultima_execucao": "",
+      "ultima_execucao": "07/05/2025 14:00",
       "status": "success",
       "frequencia": "Todos os dias - 14:00",
       "descricao": "Sincroniza os dados com o sistema externo."
@@ -14,7 +14,7 @@
       "nome": "Backup",
       "disparo": "http://localhost:8000/teste/automacoes",
       "token": "",
-      "ultima_execucao": "",
+      "ultima_execucao": "07/05/2025 14:00",
       "status": "error",
       "frequencia": "Todos os dias - 11:00",
       "descricao": "Realiza o backup semanal."

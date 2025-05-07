@@ -17,6 +17,7 @@ import { useSearchParams } from "next/navigation"
 
 
 export default function Page() {
+
   const searchParams = useSearchParams()
   const isDemo = searchParams.get("demo") === "true"
 
@@ -24,7 +25,7 @@ export default function Page() {
     id: string
     nome: string
     description: string
-    lastRun: string
+    ultima_execucao: string
     status: "success" | "warning" | "error"
     frequencia: string
     nextRun: string
@@ -77,7 +78,7 @@ export default function Page() {
     const newItem: Automation = {
       nome: newAutomation.name,
       description: newAutomation.description || "Sem descrição",
-      lastRun: `Hoje, ${formattedTime}`,
+      ultima_execucao: `Hoje, ${formattedTime}`,
       status: "success",
       frequencia: "-",
       nextRun: "-",

@@ -16,7 +16,7 @@ type Automation = {
   id: string
   nome: string
   description: string
-  lastRun: string
+  ultima_execucao: string
   frequencia: string
   disparo: string
   token: string
@@ -49,7 +49,7 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
   const [logs, setLogs] = useState<LogEntry[]>([])
   const [currentId, setCurrentId] = useState<number | null>(null)
   const [selectedAutomation, setSelectedAutomation] = useState<Automation | null>(null)
-
+  const [loadingAutomationId, setLoadingAutomationId] = useState<number | null>(null)
   const searchParams = useSearchParams()
   const isDemo = searchParams.get("demo") === "true"
 
@@ -63,6 +63,7 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
   }, [automations])
 
   const testAutomation = async (webhook: string, token: string, nome: string, id: number) => {
+    setLoadingAutomationId(Number(id))
     setMessage("Carregando...")
     setStatus("loading")
     setShowModal(true)
@@ -72,6 +73,7 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
       if (isDemo) await new Promise(resolve => setTimeout(resolve, 3000))
 
       if (res.status === 200) {
+        setLoadingAutomationId(null)
         setMessage("Funcionando corretamente")
         setStatus("success")
 
@@ -111,6 +113,11 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
     setShowEdit(true)
   }
 
+  function trashAutomation(id: number) {
+    if (isDemo) return window.location.href = '/signup'
+  }
+
+
   function logsAutomation(id: number) {
     if (isDemo) return window.location.href = '/signup'
     setCurrentId(id)
@@ -118,6 +125,7 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
   }
 
   const filteredLogs = logs.filter(log => Number(log.id_automacao) === Number(currentId))
+
 
   return (
     <>
@@ -187,7 +195,9 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
         </TableHeader>
         <TableBody>
           {automations.map((automation) => (
-            <TableRow key={automation.id} className="border-zinc-800 hover:bg-zinc-800/50 text-white">
+            <TableRow key={automation.id} className={`border-zinc-800 hover:bg-zinc-800/50 text-white ${
+              loadingAutomationId === automation.id ? 'animate-pulse-custom bg-zinc-700' : ''
+            }`}>
               <TableCell className="font-medium">
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-[#EA580C]">ID:{automation.id}</span>
@@ -197,7 +207,7 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
                   </div>
                 </div>
               </TableCell>
-              <TableCell>{automation.lastRun}</TableCell>
+              <TableCell>{automation.ultima_execucao}</TableCell>
               <TableCell>{automation.frequencia}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
@@ -207,7 +217,7 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
                       automation.token,
                       automation.nome,
                       Number(automation.id)
-                    )
+                    ) 
                   }>
                     <Play className="h-4 w-4" />
                   </Button>
@@ -217,7 +227,7 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
                   <Button size="icon" variant="ghost" onClick={() => logsAutomation(Number(automation.id))} className="h-8 w-8">
                     <Logs className="h-4 w-4" />
                   </Button>
-                  <Button size="icon" variant="ghost" className="h-8 w-8 text-red-500 hover:text-red-600">
+                  <Button size="icon" variant="ghost" onClick={() => trashAutomation(Number(automation.id))} className="h-8 w-8 text-red-500 hover:text-red-600">
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>

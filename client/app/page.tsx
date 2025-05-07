@@ -265,7 +265,7 @@ export default function LandingPage() {
             />
             <PricingCard
               title="Pro"
-              price="U$20/mês"
+              price="U$50/mês"
               description="Ideal para startups e pequenas equipes."
               features={[
                 "Webhooks ilimitados",
