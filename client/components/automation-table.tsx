@@ -196,7 +196,7 @@ export function AutomationTable({ automations, onAddLog }: AutomationTableProps)
         <TableBody>
           {automations.map((automation) => (
             <TableRow key={automation.id} className={`border-zinc-800 hover:bg-zinc-800/50 text-white ${
-              loadingAutomationId === automation.id ? 'animate-pulse-custom bg-zinc-700' : ''
+              loadingAutomationId === automation.id ? 'bg-shimmer-gradient animate-shimmer bg-[length:200%_100%]' : ''
             }`}>
               <TableCell className="font-medium">
                 <div className="flex items-center gap-2">

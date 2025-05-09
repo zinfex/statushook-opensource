@@ -95,14 +95,22 @@ const config: Config = {
 			'pulse-custom': {
 				'0%, 100%': { opacity: '1' },
 				'50%': { opacity: '.5' },
-			}
+			},
+			"shimmer": {
+				'0%': { backgroundPosition: '-200% 0' },
+				'100%': { backgroundPosition: '200% 0' },
+			},
   		},
   		animation: {
 			'slide-down': 'slideDown 0.3s ease-out',
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
 			'pulse-custom': 'pulse-custom 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-  		}
+			'shimmer': 'shimmer 2.5s linear infinite',
+  		},
+		backgroundImage: {
+			'shimmer-gradient': 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 0.13) 50%, rgba(255,255,255,0) 100%)',
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
