@@ -1,3 +1,5 @@
+'use server'
+
 import { api } from "@/config/Api";
 
 export default async function AutomationsReq() {

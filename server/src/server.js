@@ -15,7 +15,7 @@ const corsOptions = {
 require("dotenv").config();
 
 app.use(express.json());
-// connectDB();
+connectDB();
 
 app.use(cors(corsOptions));
 app.use("/automacoes", automacoesRouter);

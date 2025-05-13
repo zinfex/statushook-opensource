@@ -1,11 +1,47 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { LockIcon, MailIcon, UserIcon, UserPlusIcon } from "lucide-react"
+import { api } from "@/config/Api"
+import { useState } from "react"
+import { criarConta } from '@/lib/criarConta';
+
+
+type NovoUsuario = {
+  name: string;
+  email: string;
+  password: string;
+};
 
 export default function SignupPage() {
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [form, setForm] = useState<NovoUsuario>({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const resposta = await criarConta(form);
+      if (resposta.status === 201) {
+        window.location.href = '/login';
+      }
+    } catch (erro: any) {
+      console.log(erro.response?.data?.error || 'Erro ao criar conta');
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-black p-4">
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-90 z-0"></div>
@@ -36,7 +72,10 @@ export default function SignupPage() {
               <Input
                 id="name"
                 type="text"
+                name="name"
                 placeholder="Seu nome completo"
+                value={form.name}
+                onChange={handleChange}
                 className="bg-zinc-800 border-zinc-700 pl-10 text-white focus:border-orange-500 focus:ring-orange-500/20"
               />
             </div>
@@ -52,6 +91,9 @@ export default function SignupPage() {
               <Input
                 id="email"
                 type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
                 placeholder="seu@email.com"
                 className="bg-zinc-800 border-zinc-700 pl-10 text-white focus:border-orange-500 focus:ring-orange-500/20"
               />
@@ -68,6 +110,9 @@ export default function SignupPage() {
               <Input
                 id="password"
                 type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
                 className="bg-zinc-800 border-zinc-700 pl-10 text-white focus:border-orange-500 focus:ring-orange-500/20"
               />
             </div>
@@ -83,6 +128,8 @@ export default function SignupPage() {
               <Input
                 id="confirmPassword"
                 type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="bg-zinc-800 border-zinc-700 pl-10 text-white focus:border-orange-500 focus:ring-orange-500/20"
               />
             </div>
@@ -105,11 +152,11 @@ export default function SignupPage() {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">Criar Conta</Button>
+          <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white" onClick={handleSubmit}>Criar Conta</Button>
         </CardFooter>
         <div className="text-center pb-6 text-zinc-400 text-sm">
           Já tem uma conta?{" "}
-          <a href="#" className="text-orange-500 hover:text-orange-400">
+          <a href="/login" className="text-orange-500 hover:text-orange-400">
             Entrar
           </a>
         </div>
