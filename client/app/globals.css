@@ -92,3 +92,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.dashboard {
+  background: #000000;
+  background: linear-gradient(14deg, rgba(0, 0, 0, 1) 0%, rgba(36, 36, 36, 1) 100%);
+}
+

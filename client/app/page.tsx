@@ -83,7 +83,7 @@ export default function LandingPage() {
               </span>
             </h1>
             <p className="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto">
-              Plataforma completa para desenvolvedores testarem, monitorarem e
+              Plataforma completa para donos de negócios testarem, monitorarem e
               gerenciarem seus webhooks e automações com precisão e confiança.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -100,7 +100,7 @@ export default function LandingPage() {
                   Versão demonstração <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </a>
-              <a href="https://github.com/zinfex/webhooker-gerenciador-automacoes" target="_blank">
+              <a href="https://github.com/zinfex/statushook-opensource" target="_blank">
                 <Button className="bg-[#1A1A1C] border-zinc-700 h-12 px-8 rounded-md"><Github /> Github</Button>
               </a>
             </div>
@@ -121,7 +121,7 @@ export default function LandingPage() {
             </div>
             <div className="p-4 text-sm font-mono">
               <p className="text-zinc-400">
-                $ webhooker test --url https://seu-webhook.com
+                $ StatusHook test --url https://seu-webhook.com
               </p>
               <p className="text-green-500 mt-2">✓ Testando conexão...</p>
               <p className="text-green-500">✓ Medindo latência...</p>
@@ -218,7 +218,7 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <TestimonialCard
-              quote="O Webhooker nos ajudou a reduzir em 80% os problemas com webhooks. Agora temos confiança total em nossas automações."
+              quote="O StatusHook nos ajudou a reduzir em 80% os problemas com webhooks. Agora temos confiança total em nossas automações."
               author="Carlos Silva"
               role="CTO, AutomaTech"
             />
@@ -228,7 +228,7 @@ export default function LandingPage() {
               role="Desenvolvedora Sênior"
             />
             <TestimonialCard
-              quote="Como desenvolvedor independente, o Webhooker me permite garantir que minhas automações funcionem perfeitamente."
+              quote="Como desenvolvedor independente, o StatusHook me permite garantir que minhas automações funcionem perfeitamente."
               author="Pedro Costa"
               role="Desenvolvedor Freelancer"
             />
@@ -258,7 +258,8 @@ export default function LandingPage() {
                 "2 webhooks ativos",
                 "Testes manuais",
                 "Monitoramento básico",
-                "Gráficos e métricas básicos"
+                "Gráficos e métricas básicos",
+                "Código OpenSource"
               ]}
               buttonText="Começar Grátis"
               buttonVariant="outline"
@@ -273,6 +274,7 @@ export default function LandingPage() {
                 "Monitoramento global",
                 "Alertas por email",
                 "Gráficos e métricas avançadas",
+                "Código privado",
               ]}
               buttonText="Começar Teste Gratuito"
               buttonVariant="default"
@@ -294,7 +296,7 @@ export default function LandingPage() {
             </h2>
             <p className="text-xl text-zinc-400 mb-10 max-w-2xl mx-auto">
               Junte-se a milhares de desenvolvedores e empresas que já estão
-              construindo o futuro com Webhooker.
+              construindo o futuro com StatusHook.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button className="bg-orange-500 hover:bg-orange-600 text-white h-12 px-8 rounded-md">
@@ -324,7 +326,7 @@ export default function LandingPage() {
                 vez.
               </p>
               <div className="flex space-x-4 mt-6">
-                <a href="https://github.com/zinfex/webhooker-gerenciador-automacoes" target="_blank" className="text-zinc-500 hover:text-white">
+                <a href="https://github.com/zinfex/statushook-opensource" target="_blank" className="text-zinc-500 hover:text-white">
                   <LucideGithub className="h-5 w-5" />
                 </a>
 
