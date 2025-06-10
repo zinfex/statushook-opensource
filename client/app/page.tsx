@@ -22,7 +22,7 @@ export default function LandingPage() {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-transparent">
-                Webhooker
+                StatusHook
               </span>
             </div>
             <nav className="hidden md:flex items-center space-x-8">
@@ -317,7 +317,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
             <div className="col-span-2 lg:col-span-1">
               <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-transparent">
-                Webhooker
+                StatusHook
               </span>
               <p className="mt-4 text-sm text-zinc-500">
                 Construindo o futuro do desenvolvimento web, um deploy de cada
@@ -475,7 +475,7 @@ export default function LandingPage() {
           </div>
           <div className="mt-12 pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-zinc-500">
-              &copy; 2025 Webhooker. Todos os direitos reservados.
+              &copy; 2025 StatusHook. Todos os direitos reservados.
             </p>
             <div className="mt-4 md:mt-0 flex space-x-6">
               <a href="#" className="text-sm text-zinc-500 hover:text-white">

@@ -23,7 +23,7 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: {
-    default: 'Webhooker - Monitore suas automações',
+    default: 'StatusHook - Monitore suas automações',
     template: '%s - Monitore suas automações',
     absolute: '',
   },
